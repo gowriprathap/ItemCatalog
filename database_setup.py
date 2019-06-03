@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = 'user'
 
@@ -12,6 +13,7 @@ class User(Base):
     name = Column(String(32), index=True)
     picture = Column(String)
     email = Column(String)
+
 
 class Category(Base):
     __tablename__ = 'category'
@@ -23,9 +25,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-       """Return object data in easily serializeable format"""
-       return {
-       'id'           : self.id,
-           'name'         : self.name,
-
-       }
+        return {
+            'id': self.id,
+            'name': self.name,
+           }
