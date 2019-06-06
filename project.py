@@ -1,18 +1,24 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, request
+#importing modules from Flask
 from flask import redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
+#importing modules from sqlalchemy
 from sqlalchemy.orm import sessionmaker, joinedload
 from sqlalchemy.orm.exc import NoResultFound
 from database_setup import Base, Item, Category, User
+#Importing the tables from database_setup, the python program which created the database
 from flask import session as login_session
+#modules to know if user is signed in or not
 import random
 import string
 from oauth2client.client import flow_from_clientsecrets
+#importing modules for google sign in button
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import httplib2
 import json
+#importing json
 from flask import make_response
 import requests
 
@@ -25,25 +31,27 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-
+#storing the client id from the json file for google login
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
-#APPLICATION = "Restaurant Menu App"
 
-# Create anti-forgery state token
-@app.route('/login')
+
+
+@app.route('/login') # for URL ending with /login, which is the page when user logs in using google
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in xrange(32))
+                    for x in xrange(32)) #making a random state to reduce the probability of attack from malicious users
     login_session['state'] = state
 
-    return render_template('login.html', STATE=state)
+    return render_template('login.html', STATE=state) #using the login.html file to display
 
 
-@app.route('/gconnect', methods=['POST'])
+@app.route('/gconnect', methods=['POST']) # routing function that accepts post requests
+#using google to sign into the application
 def gconnect():
 
-    # Validate state token
+    # Validate state token and see if the token the client sent the server matches the token the server sent to the client
+    # To protect from malicious users
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -51,35 +59,35 @@ def gconnect():
     # Obtain authorization code
     code = request.data
     try:
-        # Upgrade the authorization code into a credentials object
+        # Using one time code and exchanging it for a credentials object
         oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
-    except FlowExchangeError:
+        oauth_flow.redirect_uri = 'postmessage' # the one time code
+        credentials = oauth_flow.step2_exchange(code) # initiating the exchange by passing in the one time code
+    except FlowExchangeError: # if an error happens, send the response as a JSON object
         response = make_response(json.dumps('Failed to upgrade the authorization code.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
     # Check that the access token is valid.
     access_token = credentials.access_token
     url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
-           % access_token)
+           % access_token) # Google API server will verify that this is a valid token for use
     h = httplib2.Http()
     result = json.loads(h.request(url, 'GET')[1])
 
- # If there was an error in the access token info, abort.
+ # If there was an error in the access token info, send a 500 internal server error to the client
     if result.get('error') is not None:
         response = make_response(json.dumps(result.get('error')), 500)
         response.headers['Content-Type'] = 'application/json'
         return response
 
-     # Verify that the access token is used for the intended user.
+     # This is to confirm that the access token is used for the intended user.
     gplus_id = credentials.id_token['sub']
     if result['user_id'] != gplus_id:
         response = make_response(json.dumps("Token's user ID doesn't match given user ID."), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    # Verify that the access token is valid for this app.
+    # If they do not match, then send a 401 response using JSON
     if result['issued_to'] != CLIENT_ID:
         response = make_response(
             json.dumps("Token's client ID does not match app's."), 401)
@@ -87,6 +95,7 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
+    # If the user is already logged in, a 200 successful message is given without resetting all the variables.
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
@@ -95,7 +104,7 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-     # Store the access token in the session for later use.
+     # If none of the if statements were true, the user successfully logged in and these variables are stored for use later.
     login_session['access_token'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
@@ -106,7 +115,8 @@ def gconnect():
 
     data = answer.json()
 
-    login_session['username'] = data['name'] #email?
+# storing the name, picture and email id for display
+    login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
@@ -124,7 +134,7 @@ def gconnect():
     output += login_session['picture']
     output += ' "style = "width: 300px; height: 300px;border-radius: 150px;'\
         '-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-    flash("Welcome, %s" % login_session['username'])
+    flash("Welcome to the Musical Instruments Catalog, %s" % login_session['username'])
     print "done!"
     return output
 
