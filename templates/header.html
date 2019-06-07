@@ -1,0 +1,15 @@
+<!--header for every page-->
+<header id="top-header" class="row">
+	<div class="col-md-6">
+		<a href="{{url_for('catalogFunction')}}"> <!--going back to function in project.py-->
+			<h1 class="appName">Musical Instruments</h1> <!--heading of the page-->
+		</a>
+	</div>
+	<div class="col-md-6 text-right log-but">
+		{%if 'username' not in session %} <!--if user is not logged in, display the login button-->
+			<a href="{{url_for('showLogin')}}"><button type="button"  id="log-in-out-button" class="btn btn-outline-success btn-lg">Login</button></a>
+		{% else %} <!--if user is logged in, display the log out button-->
+			<a href="{{url_for('gdisconnect')}}"><button type="button"  id="log-in-out-button" class="btn btn-outline-danger btn-lg">Logout</button></a>
+		{% endif %}
+	</div>
+</header>
