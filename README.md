@@ -55,7 +55,7 @@ The endpoints can be acessible for all clients, but some pages is only available
 > * Edit an item:
 > `/category/<int:category_id>/items/<int:item_id>/edit`
 > * Delete an item:
-> `/category/<int:category_id>/items/<int:item_id>/delete`O
+> `/category/<int:category_id>/items/<int:item_id>/delete`
 
 ### JSON Endpoints
 
