@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+    <section class="row main-body">
+      <div class="col-md-6">
+        <div class="flash">
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <p><strong>{{message}}</strong></p> <!--flashing messages to the user-->
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </section>
+    <section class="row main-body">
+      <div class="item-desg">
+        <article id="item-description" class="col-md-12">
+            <h2 class="item-title">{{ itemName.name }}</h2> <!--displaying the item name-->
+            <p class="item-desc">{{ itemName.description }} <!--displaying the item description-->
+            </p>
+            <div class="item-button">
+              <a href="{{ url_for('editItemFunction', item_id=itemName.id, category_id=category.id)}}">
+        				<button class="btn btn-primary link-color">
+        					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit <!--button for editing the item-->
+        				</button>
+        			</a>
+              <a href="{{ url_for('deleteItemFunction', item_id=itemName.id, category_id=category.id)}}">
+        				<button class="btn btn-danger link-color">
+        					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete <!--button for deleting the item-->
+        				</button>
+        			</a>
+            </div>
+        </article>
+      </div>
+    </section>
+{% endblock %}
