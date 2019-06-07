@@ -1,8 +1,7 @@
-{% extends "main.html" %} <!--including features implemented in main.html-->
+{% extends "main.html" %}
 {% block content %}
-{% include "header.html" %} <!--including the header in the page-->
+{% include "header.html" %}
     <div class="row main-body">
-
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
@@ -30,7 +29,7 @@
         <div class="cat-all-list">
           {% for i in itemName %}
             <div class="list-group cat-list">
-              <a href="{{ url_for('itemFunction', category_id=i.category.id, item_id=i.id)}}" class="list-group-item">{{ i.name }} ({{ i.category.name }})</a> <!--name of the item in category-->
+              <a href="{{ url_for('itemFunction', category_id=i.category.id, item_id=i.id)}}" class="list-group-item">{{ i.name }} ({{ i.category.name }})</a>
             </div>
           {% endfor %}
         </div>
