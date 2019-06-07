@@ -38,9 +38,10 @@
               {% for i in category %}
                 <option value="{{i.id}}">{{ i.name }}</option> <!--names of categories to select from-->
               {% endfor %}
-            </select>
+              </select>
+              
           </div>
-          
+
           <input type='submit' value='Create'>
         </form>
         <a href="{{ url_for('categoryFunction', category_id = category2.id)}}">

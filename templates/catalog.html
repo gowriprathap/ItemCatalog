@@ -3,7 +3,7 @@
 {% block content %}
 {% include "header.html" %} <!--including the header in page-->
 	<section class="row main-body">
-		<div class="col-md-6">
+		<div class="col-md-7">
     <div class = 'flash'>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -14,10 +14,10 @@
       {% endwith %}
     </div>
     </div>
-		<div class="col-md-6">
+		<div class="col-md-5">
     <div class="new-item-button">
 			<a href="{{url_for('newCategoryFunction')}}"> <!--going back to the function in project.py-->
-				<button class="btn btn-primary" id = "itemButton">
+				<button class="btn btn-primary" id = "new-item-button">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create a new category <!--button to create new category-->
 				</button>
 			</a>

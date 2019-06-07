@@ -356,6 +356,8 @@ def deleteCategoryFunction(category_id):
         # That person is not authorized to delete the category
         return redirect(url_for('catalogFunction'))
     if request.method == 'POST':
+        deleteItem = session.query(Item).filter_by(
+                                        category_id=category2.id).delete()
         session.delete(category2)
         session.commit()  # Committing to the session to delete the category
         flash('%s is successfully Deleted' % category2.name)
@@ -491,7 +493,7 @@ def editItemFunction(category_id, item_id):
         flash(' Item Successfully Edited')
         # Flashing message that item was successfully edited
         return redirect(url_for(
-            'itemFunction', category_id=editItem.category_id, item_id=item_id))
+            'categoryFunction', category_id=editItem.category_id, item_id=item_id))
     else:
         return render_template(
             'editItem.html',

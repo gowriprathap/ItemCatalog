@@ -11,7 +11,7 @@
 	  {% endfor %}
 	  {% endif %}
     {% endwith %}
-		
+
 </div>
 </div>
 </section>
@@ -23,7 +23,7 @@
           <p class="title2">Are you sure you want to edit item {{editItem.name}}?</p> <!--asking for confirmation-->
           <form class = "col-md-12 newitem" action="{{url_for('editItemFunction', category_id=editItem.category_id, item_id=editItem.id)}}" method='POST'>
 						<div class="form-group">
-							<label>Name:</label> <!--user's input for name of item-->
+							<label>Name</label> <!--user's input for name of item-->
 							<input class="form-control" type='text' size='30' name='name' value='{{editItem.name}}' placeholder='{{editItem.name}}' required>
               <label>Description</label> <!--user's description of item-->
               <textarea class="form-control" name='description' value='{{editItem.description}}' placeholder='{{editItem.description}}' rows="3" required></textarea>

@@ -2,7 +2,7 @@
 {% block content %}
 {% include "header.html" %} <!--including the header in the page-->
 <section class="row main-body">
-	<div class="col-md-9">
+	<div class="col-md-8">
 	<div class = 'flash'>
 		{% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -13,7 +13,15 @@
     {% endwith %}
   </div>
   </div>
-	
+	<div class="col-md-1 cat-buttons">
+			 <div id = "new-item-button">
+				 <a href="{{url_for('catalogFunction', category_id = m_instruments2.id )}}"> <!--going back to the logic in project.py-->
+					 <button class="btn btn-primary" id="new-item-danger">
+						 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Go back <!--button for deleting a category-->
+					 </button>
+				 </a>
+				 </div>
+				 </div>
 	<div class="col-md-1 cat-buttons">
 		<div id = "new-item-button">
 			<a href="{{url_for('newItemFunction', category_id = m_instruments2.id )}}"> <!--going back to the logic in project.py-->
@@ -41,6 +49,7 @@
 							</a>
 							</div>
 							</div>
+
 </section>
 
 <section class="row main-body">
