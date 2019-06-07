@@ -1,0 +1,27 @@
+{% extends "main.html" %} <!--including features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in the page-->
+    <section class="row main-body">
+      <div class="col-md-6">
+        <div class="flash">
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <p><strong>{{message}}</strong></p> <!--flashing messages to the user-->
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </section>
+    <section class="row main-body">
+      <div class="item-desg">
+        <article id="item-description" class="col-md-12">
+            <h2 class="item-title">{{ itemName.name }}</h2> <!--printing the item name-->
+            <p class="item-desc">{{ itemName.description }} <!--printing the item description-->
+            </p>
+        </article>
+      </div>
+    </section>
+{% endblock %}
