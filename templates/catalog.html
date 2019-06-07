@@ -1,0 +1,57 @@
+
+{% extends "main.html" %} <!--including the features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in page-->
+	<section class="row main-body">
+		<div class="col-md-6">
+    <div class = 'flash'>
+      {% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+
+    {% for message in messages %}
+        <p> <strong> {{ message }} </strong> </p> <!--flashing messages to the user-->
+    {% endfor %}
+
+    {% endif %}
+{% endwith %}
+</div>
+</div>
+		<div class="col-md-6">
+
+	<div class="new-item-button">
+
+
+			<a href="{{url_for('newCategoryFunction')}}"> <!--going back to the function in project.py-->
+				<button class="btn btn-primary" id = "itemButton">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create a new category <!--button to create new category-->
+				</button>
+			</a>
+		</div>
+    </div>
+  </section>
+  <section class="row main-body">
+    <div id="item-description" class="col-md-4">
+      <h2 class="cat-title">Categories</h2>
+      <div class="cat-all-list">
+        {% for i in m_instruments %} <!--looping through the instruments to display them-->
+        <div class="list-group cat-list">
+          <a href="{{ url_for('categoryFunction', category_id=i.id)}}" class="list-group-item">{{ i.name }}</a> <!--going back to the function in project.py-->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <ul class="col-md-2">
+  </ul>
+  <div id="item-description" class="col-md-6">
+    <h2 class="cat-title">Latest items</h2> <!--displaying the last added items-->
+    <div class="cat-all-list">
+      {% for i in itemName %}
+        <div class="list-group cat-list">
+          <a href="{{ url_for('itemFunction', category_id=i.category.id, item_id=i.id)}}" class="list-group-item">{{ i.name }} ({{ i.category.name }})</a> <!--displaying item name and category it belongs to-->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
