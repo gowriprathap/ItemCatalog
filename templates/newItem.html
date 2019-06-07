@@ -15,6 +15,7 @@
         </div>
       </div>
     </section>
+
     <header class="row main-body">
       <h2 class="col-md-12 title">Create new Item</h2> <!--heading-->
     </header>
@@ -25,10 +26,12 @@
             <label>Name of item</label> <!--name of the new item-->
             <input type="text" class="form-control" id="inputTitle" name='name' required>
           </div>
+
           <div class="form-group">
             <label>Description</label> <!--description of the new item-->
             <textarea class="form-control" id="inputDescription" rows="3" name='description' required></textarea>
           </div>
+
           <div class="form-group">
             <label>Category</label> <!--drop down for category the item should belong to-->
             <select class="form-control" id="inputCategory" name="category" placeholder='{{category.category_id}}' required>
@@ -37,6 +40,7 @@
               {% endfor %}
             </select>
           </div>
+          
           <input type='submit' value='Create'>
         </form>
         <a href="{{ url_for('categoryFunction', category_id = category2.id)}}">
