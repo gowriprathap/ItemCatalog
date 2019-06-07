@@ -1,0 +1,39 @@
+{% extends "main.html" %} <!--including features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in the page-->
+    <div class="row main-body">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="col-md-12 flash"><strong>{{message}}</strong></p> <!--flashing messages to the user-->
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <section class="row main-body">
+      <div id="item-description" class="col-md-4">
+        <h2 class="cat-title">Categories</h2> <!--heading-->
+        <div class="cat-all-list">
+          {% for i in m_instruments %}
+            <div class="list-group cat-list">
+              <a href="{{ url_for('categoryFunction', category_id=i.id)}}" class="list-group-item">{{ i.name }}</a> <!--name of the musical instruments-->
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <ul class="col-md-2">
+
+      </ul>
+      <div id="item-description" class="col-md-6">
+        <h2 class="cat-title">Latest Items</h2> <!--latest items added-->
+        <div class="cat-all-list">
+          {% for i in itemName %}
+            <div class="list-group cat-list">
+              <a href="{{ url_for('itemFunction', category_id=i.category.id, item_id=i.id)}}" class="list-group-item">{{ i.name }} ({{ i.category.name }})</a> <!--name of the item in category-->
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+{% endblock %}
