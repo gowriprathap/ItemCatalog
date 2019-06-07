@@ -1,0 +1,182 @@
+a:hover, a:visited, a:link, a:active  {
+    text-decoration: none;
+}
+
+#top-header {
+  height: 7em;
+  background-color: #5D5C61;
+}
+
+#log-in-out-button { /*details of log in and log out buttons*/
+  float: right;
+  margin: 5% 2.5% 0 0;
+  background-color: #51A296;
+  color: white;
+}
+
+#new-item-button, #new-item-danger { /*new item button*/
+  margin: 2% 3.5% 0 0;
+  text-align: right;
+  background-color: #51A296;
+  font-family: 'Ubuntu', serif;
+  color: #5D5C61;
+  font-weight: bold;
+  border-color: #5D5C61;
+  font-size: 20px;
+}
+
+
+
+.list-group-item { /*the list of musical instruments*/
+  color: #5D5C61;
+  border: 0px;
+  font-family: 'Courgette', serif;
+  font-size: 200%;
+  text-align: center;
+  background-color: #51A296;
+  font-weight: bold;
+}
+
+#item-description {
+  margin: 2.5% 0 4% 0;
+}
+
+.margin-top-sections {
+  margin-top: 3.5%;
+}
+
+.appName {
+  font-family: 'Ubuntu', cursive;
+  font-size: 500%;
+  color: white;
+  margin:0 0 0 2.5%;
+
+}
+
+.main-body { /*main body*/
+  background-color: #7395AE;
+}
+
+.main-footer  { /*the footer with name*/
+  height: 3em;
+  background-color: #5D5C61
+}
+
+.name-footer {
+    text-align: center;
+    margin: 0.75% 0 0 0;
+    color: white;
+}
+
+.cat-list {
+    border: 10px;
+    border-radius: 20em;
+    margin-left: 15%;
+    width: 70%;
+    background-color: black;
+
+}
+
+.cat-all-list {
+  background-color: #7396AE;
+  border-radius: 4em;
+}
+
+.cat-title {
+  text-align:center;
+  margin-bottom: 4%;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 255%;
+  color:  #5D5C61;
+  font-weight: bold;
+}
+
+
+.flash { /*flashing messages*/
+  color: white;
+  margin: 2% 0 0 3.5%;
+  font-family: 'Ubuntu';
+  font-size: 25px;
+}
+
+.item-title {
+  text-align: center;
+  margin-bottom: 1.5%;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 255%;
+  color: black;
+  font-weight: bold;
+}
+
+.item-desc {
+  color: white;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  color: black;
+}
+
+.item-desg {
+  border-width: medium;
+  border-color: white;
+  border-style: double;
+  border-radius: 25%;
+  margin: 2% 0 5% 10%;
+  width: 80%;
+}
+
+.item-button {
+  text-align: center;
+  margin-top: 3.5%;
+  background-color: #5D5C61;
+  font-size: 30px;
+  border-color: #5D5C61;
+}
+
+.login {
+  margin: 5% 5% 5% 5%;
+  border-width: medium;
+  border-color: white;
+  border-style:solid;
+  margin: 2% 2% 2% 2%;
+  height: 30em;
+
+}
+
+.title {
+  text-align:center;;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 255%;
+  color: black;
+  font-weight: bold;
+  margin: 2% 0 2% 0;
+}
+
+.google-button {
+
+  margin: 17% 2.5% 0 43%;
+  background-color: white;
+  color: black;
+}
+
+.admin-attr {
+  text-align: center;
+  margin: 5% 0 5% 0;
+}
+
+.newitem {
+  margin-bottom: 2%;
+}
+
+.login-page {
+  margin-top: 2.5%;
+  text-align: center;
+}
+
+.title2 {
+  text-align:center;;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 190%;
+  color: black;
+  font-weight: bold;
+  margin: 2% 0 2% 0;
+}
