@@ -1,4 +1,4 @@
-
+<!--catalog page-->
 {% extends "main.html" %} <!--including the features implemented in main.html-->
 {% block content %}
 {% include "header.html" %} <!--including the header in page-->
@@ -6,22 +6,16 @@
 		<div class="col-md-6">
     <div class = 'flash'>
       {% with messages = get_flashed_messages() %}
-  {% if messages %}
-
-
-    {% for message in messages %}
-        <p> <strong> {{ message }} </strong> </p> <!--flashing messages to the user-->
-    {% endfor %}
-
-    {% endif %}
-{% endwith %}
-</div>
-</div>
+      {% if messages %}
+      {% for message in messages %}
+      <p> <strong> {{ message }} </strong> </p> <!--flashing messages to the user-->
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+    </div>
 		<div class="col-md-6">
-
-	<div class="new-item-button">
-
-
+    <div class="new-item-button">
 			<a href="{{url_for('newCategoryFunction')}}"> <!--going back to the function in project.py-->
 				<button class="btn btn-primary" id = "itemButton">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create a new category <!--button to create new category-->
@@ -39,8 +33,8 @@
           <a href="{{ url_for('categoryFunction', category_id=i.id)}}" class="list-group-item">{{ i.name }}</a> <!--going back to the function in project.py-->
         </div>
       {% endfor %}
-    </div>
-  </div>
+      </div>
+     </div>
   <ul class="col-md-2">
   </ul>
   <div id="item-description" class="col-md-6">
