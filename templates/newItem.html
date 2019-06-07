@@ -1,0 +1,49 @@
+{% extends "main.html" %} <!--including features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in the page-->
+    <section class="row main-body">
+      <div class="col-md-12">
+        <div class="flash">
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <p><strong>{{message}}</strong></p> <!--flashing messages to the user-->
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </section>
+    <header class="row main-body">
+      <h2 class="col-md-12 title">Create new Item</h2> <!--heading-->
+    </header>
+    <section class="row main-body">
+      <div class="col-md-12 admin-attr">
+        <form class="col-md-12 newitem" action="{{url_for('newItemFunction', category_id=category2.id )}}" method='POST'>
+          <div class="form-group">
+            <label>Name of item</label> <!--name of the new item-->
+            <input type="text" class="form-control" id="inputTitle" name='name' required>
+          </div>
+          <div class="form-group">
+            <label>Description</label> <!--description of the new item-->
+            <textarea class="form-control" id="inputDescription" rows="3" name='description' required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Category</label> <!--drop down for category the item should belong to-->
+            <select class="form-control" id="inputCategory" name="category" placeholder='{{category.category_id}}' required>
+              {% for i in category %}
+                <option value="{{i.id}}">{{ i.name }}</option> <!--names of categories to select from-->
+              {% endfor %}
+            </select>
+          </div>
+          <input type='submit' value='Create'>
+        </form>
+        <a href="{{ url_for('categoryFunction', category_id = category2.id)}}">
+          <button class="btn btn-danger">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Cancel <!--cancel button-->
+          </button>
+        </a>
+      </div>
+    </section>
+{% endblock %}
