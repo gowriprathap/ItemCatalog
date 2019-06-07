@@ -493,7 +493,8 @@ def editItemFunction(category_id, item_id):
         flash(' Item Successfully Edited')
         # Flashing message that item was successfully edited
         return redirect(url_for(
-            'categoryFunction', category_id=editItem.category_id, item_id=item_id))
+            'categoryFunction',
+            category_id=editItem.category_id, item_id=item_id))
     else:
         return render_template(
             'editItem.html',

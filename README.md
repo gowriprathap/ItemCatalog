@@ -43,22 +43,22 @@ The endpoints can be acessible for all clients, but some pages is only available
 
 ### HTML Endpoints:
 
-> * List all categories: `/category`
-> * Create a new category: `/category/news`
-> * Edit a category:     `/category/<int:category_id>/edit`
-> * Delete a category: `/category/<int:category_id>/delete`
+> * List all the categories in the database: `/category`
+> * Create a new category in the database: `/category/news`
+> * Edit a category in the database:     `/category/<int:category_id>/edit`
+> * Delete a category in the database: `/category/<int:category_id>/delete`
 > * List all items for the category:
 > `/category/<int:category_id>/items`
-> * Display an item:
+> * Display an item in the category:
 > `/category/<int:category_id>/items/<int:item_id>`
-> * Add an item: `/category/<int:category_id>/items/new`
-> * Edit an item:
+> * Add an item in the category: `/category/<int:category_id>/items/new`
+> * Edit an item in the category:
 > `/category/<int:category_id>/items/<int:item_id>/edit`
-> * Delete an item:
+> * Delete an item in the category:
 > `/category/<int:category_id>/items/<int:item_id>/delete`
 
 ### JSON Endpoints
 
-> * List categories with respective items: `/category/JSON`
-> * List all items for the category: `/category/<int:category_id>/items/JSON`
-> * Display item infos: `/category/<int:category_id>/items/<int:item_id>/JSON`
+> * List the categories with the itemss: `/category/JSON`
+> * List the items of a particular category: `/category/<int:category_id>/items/JSON`
+> * Display the information of each item: `/category/<int:category_id>/items/<int:item_id>/JSON`
