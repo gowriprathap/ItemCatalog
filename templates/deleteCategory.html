@@ -1,0 +1,38 @@
+{% extends "main.html" %} <!--including features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in the page-->
+<section class="row main-body">
+	<div class="col-md-12">
+	<div class = 'flash'>
+		{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+
+	{% for message in messages %}
+			<p> <strong> {{ message }} </strong> </p> <!--flashing messages to the user-->
+	{% endfor %}
+
+	{% endif %}
+{% endwith %}
+</div>
+</div>
+</section>
+<header class="row main-body">
+        <h2 class="col-md-12 title">Delete category</h2> <!--heading-->
+      </header>
+      <section class="row main-body">
+        <div class="col-md-12 admin-attr">
+          <p class="title2">Are you sure you want to delete category {{category2.name}}?</p> <!--confirmation message to ensure that user wants to delete category-->
+          <form action="{{url_for('deleteCategoryFunction', category_id=category2.id)}}" method='POST'> <!--checking if the user is authorized to delete-->
+            <div class="form-group">
+              <input type='submit' value='Delete'> <!--delete button-->
+            </div>
+          </form>
+          <a href="{{ url_for('catalogFunction')}}">
+            <button class="btn btn-danger">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Cancel <!--cancel button-->
+            </button>
+          </a>
+        </div>
+    </section>
+{% endblock %}
