@@ -1,0 +1,37 @@
+{% extends "main.html" %} <!--including features implemented in main.html-->
+{% block content %}
+{% include "header.html" %} <!--including the header in the page-->
+<section class="row main-body">
+	<div class="col-md-12">
+	<div class = 'flash'>
+		{% with messages = get_flashed_messages() %}
+{% if messages %}
+	{% for message in messages %}
+			<p> <strong> {{ message }} </strong> </p> <!--flashing messages to the user-->
+	{% endfor %}
+	{% endif %}
+{% endwith %}
+</div>
+</div>
+</section>
+<header class="row main-body">
+        <h2 class="col-md-12 title">Edit category</h2> <!--heading-->
+      </header>
+      <section class="row main-body">
+        <div class="col-md-12 admin-attr">
+          <p class="title2">Are you sure you want to edit category {{category2.name}}?</p> <!--confirmation message to ensure that user wants to edit category-->
+          <form action="{{url_for('editCategoryFunction', category_id=category2.id)}}" method='POST'> <!--checking if the user is authorized to edit the item-->
+            <div class="form-group">
+							<label>Name:</label> <!--new name of category-->
+              <input type='text' size='30' name='name' placeholder='{{category2.name}}' required>
+              <input type='submit' value='Edit'>
+            </div>
+          </form>
+          <a href="{{ url_for('catalogFunction')}}">
+            <button class="btn btn-danger">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Cancel <!--cancel button-->
+            </button>
+          </a>
+        </div>
+    </section>
+{% endblock %}
