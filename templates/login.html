@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--meta name="description" content="Udacity Item-Catalog project for Full-Stack course" />
+      <meta name="Gowri Prathap" content="">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"-->
+      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+      <meta charset="utf-8">
+      <title>Musical Instruments - Login</title>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+      <!--link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet"-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!--link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+      <meta name="google-signin-client_id" content="410011451589-vrmqekjg2v1be4fku04u40lb3a0kg4jp.apps.googleusercontent.com">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+      <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+      <!--creating an anonymous function that inserts a script into the DOM of the login.html page-->
+      <script>
+
+
+  function start() {
+    gapi.load('auth2', function() {
+      auth2 = gapi.auth2.init({
+        client_id: "410011451589-vrmqekjg2v1be4fku04u40lb3a0kg4jp.apps.googleusercontent.com" //the client ID from google for log in
+      });
+    });
+  }
+</script>
+
+
+</head>
+
+
+<body>
+  <div class="container-fluid wrapper">
+        {% include "header.html" %}
+        <div class="row main-body">
+          <div class="col-md-12">
+            <h2 class="title">Welcome! Please Log in to continue.</h2>
+          </div>
+        </div>
+        <div class="row main-body">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 login">
+  <button id="signinButton" class="google-button">Sign in with google</button>
+  <div id="result"></div>
+  <script>
+    $('#signinButton').click(function() {
+
+      function signInCallback(authResult){ //signInCallback function that takes in authResult as the Argument
+
+        if (authResult['code']){ //if it has the parameter 'code', the authorization with google was successful and the one time use code is present
+
+          $('#signinButton').attr('style', 'display: none'); //once the user is authorized, the google sign in button is hidden
+
+          $.ajax({ //to pass the one time code google gave the client on to the server
+            type: 'POST', //specify as a post method
+            url: '/gconnect?state={{STATE}}', //passing the server state token to verify against forgery
+
+            headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+            },
+
+            contentType: 'application/octet-stream; charset=utf-8', //we are sending an arbitrary binary stream of data and formatted using unicode
+            success:function(result){ //if login was successful
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...') //sending a successful login message to the user
+                   setTimeout(function() {
+                    window.location.href = "/";
+                  }, 2000); //redirect to the catalog page in 2 seconds
+
+            },
+            processData:false, //we do not want JQuery to pass the response into a string
+            data:authResult['code'] //specifying the data being sent to the server, the one time use code
+          });
+        } else{
+          // handle error
+          console.log('There was an error: ' + authResult['error']); //if there is an error, it would be printed to the console
+          $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+        }
+      }
+
+      auth2.grantOfflineAccess().then(signInCallback);
+    });
+  </script>
+</div>
+</div>
+
+
+  </body>
+</html>
